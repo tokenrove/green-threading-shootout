@@ -15,7 +15,4 @@ static void simplest_case()
     cmp_ok(strand_sched(p), "==", -1);
 }
 
-static struct test this = {name:"simplest_case", fn:simplest_case, expected:3};
-
-static void add_test_to_harness() __attribute__((constructor));
-static void add_test_to_harness() { this.next = tests; tests = &this; ++n_tests; }
+REGISTER_TEST(simplest_case, 3)

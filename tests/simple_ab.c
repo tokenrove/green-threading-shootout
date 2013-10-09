@@ -37,7 +37,4 @@ static void simple_ab()
     ok(bits == 0xAAAAAAAAAAAAAAAALL);
 }
 
-static struct test this = {name:"simple_ab", fn:simple_ab, expected:2};
-
-static void add_test_to_harness() __attribute__((constructor));
-static void add_test_to_harness() { this.next = tests; tests = &this; ++n_tests; }
+REGISTER_TEST(simple_ab, 2)
