@@ -1,0 +1,11 @@
+sudo: false
+language: c
+compiler: gcc-5
+script: make all test
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-5
+      - clang-3.5
