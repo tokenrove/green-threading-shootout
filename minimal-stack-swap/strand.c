@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stdlib.h>
 #include "strand.h"
 
 #ifndef NVALGRIND
@@ -22,7 +23,7 @@ strand strand_spawn(int (*fn)(strand, void *), void *data, size_t size_in_words)
 {
     struct strand_ *strand;
     size_t len = ((size_in_words * sizeof (void*)) + stack_min_size + (stack_alignment-1)) & (-stack_alignment);
-    posix_memalign((void**)&strand, stack_alignment, len);
+    strand = aligned_alloc(stack_alignment, len);
     (void)VALGRIND_STACK_REGISTER(strand, strand+len);
     strand->sp = strand+len-stack_alignment;
     strand->parent = 0;
