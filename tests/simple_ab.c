@@ -18,7 +18,7 @@ static void simple_ab()
     uint64_t bits = 0;
     bool a_done, b_done;
 
-    note("alternate between two functions");
+    diag("alternate between two functions");
     a = strand_spawn(fn_bit, &(struct bit){ .p = &bits, .v = 0}, 128);
     b = strand_spawn(fn_bit, &(struct bit){ .p = &bits, .v = 1}, 128);
     do {

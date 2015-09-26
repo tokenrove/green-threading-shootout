@@ -30,7 +30,7 @@ uint64_t determine_perf_counter_overhead(void)
     for (int i = 0; i < N; ++i) {
         within += abs(v[i] - mean) < 1.96*sd ? 1 : 0;
     }
-    note("performance counter overhead: mean %g, SD %g, %% within: %g\n", mean, sd, 100.*(double)within/N);
+    diag("performance counter overhead: mean %g, SD %g, %% within: %g\n", mean, sd, 100.*(double)within/N);
     return mean;
 }
 
@@ -44,11 +44,11 @@ int main(void)
     }
     plan(expected);
     for (struct test *p = tests; NULL != p; p = p->next) {
-        note(p->name);
+        diag(p->name);
         uint64_t then = read_perf_counter();
         p->fn();
         uint64_t now = read_perf_counter();
-        note("cycles elapsed: %ld", now - then - perf_counter_overhead);
+        diag("cycles elapsed: %ld", now - then - perf_counter_overhead);
     }
     done_testing();
 }

@@ -9,13 +9,13 @@ CLEAN = $(CONTESTANTS:%=t/%.t)
 
 .PHONY: clean all test check check-syntax
 
-DEPS := deps/libtap/libtap.a
-deps/libtap/libtap.a:
-	$(MAKE) -C deps/libtap
-
 all: $(CONTESTANTS:%=t/%.t)
 
 %/..: ; mkdir -p $(@D)
+
+DEPS := deps/libtap/libtap.a
+deps/libtap/libtap.a:
+	$(MAKE) -C deps/libtap
 
 t/%.t: %/*.[cS] tests/harness.c tests/perf_counter_x86_64.S $(TESTS:%=tests/%.c) | t/.. Makefile $(DEPS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
